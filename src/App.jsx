@@ -56,9 +56,40 @@ function App() {
 export default App;
 
 function Header() {
+  const hour = new Date().getHours();
+  const openHours = 9;
+  const closeHours = 21;
+
+  const isOpen = hour >= openHours && hour <= closeHours;
+
   return (
     <header>
       <h1>Electronic store</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="#Home">Home</a>
+          </li>
+          <li>
+            <a href="#Catalog">Catalog</a>
+          </li>
+          <li>
+            <a href="#About Us">About Us</a>
+          </li>
+          <li>
+            <a href="#Contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        {isOpen ? (
+          <p>
+            We are currently open: {openHours}:00 - {closeHours}:00
+          </p>
+        ) : (
+          <p>We a closed. Open at {openHours}:00 o'clock.</p>
+        )}
+      </div>
     </header>
   );
 }
@@ -74,7 +105,18 @@ function Catalog() {
 }
 
 function Product() {
-  return <li>Product</li>;
+  const product = [...productData];
+
+  return (
+    <li>
+      <img src={product[0].photoName} alt={product[0].name} />
+      <div>
+        <h3>{product[0].name}</h3>
+        <p>{product[0].description}</p>
+        <span>{product[0].price}</span>
+      </div>
+    </li>
+  );
 }
 
 function Footer() {

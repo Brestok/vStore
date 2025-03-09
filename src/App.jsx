@@ -1,3 +1,5 @@
+import "./index.css";
+
 const productData = [
   {
     name: "Laptop Pro",
@@ -63,25 +65,29 @@ function Header() {
   const isOpen = hour >= openHours && hour <= closeHours;
 
   return (
-    <header>
+    <header className="header">
       <h1>Electronic store</h1>
-      <nav>
+      <nav className="nav">
         <ul>
           <li>
-            <a href="#Home">Home</a>
+            Home
+            <a href="#Home"></a>
           </li>
           <li>
-            <a href="#Catalog">Catalog</a>
+            Catalog
+            <a href="#Catalog"></a>
           </li>
           <li>
-            <a href="#About Us">About Us</a>
+            About Us
+            <a href="#About Us"></a>
           </li>
           <li>
-            <a href="#Contact">Contact</a>
+            Contact
+            <a href="#Contact"></a>
           </li>
         </ul>
       </nav>
-      <div>
+      <div className="working-hours">
         {isOpen ? (
           <p>
             We are currently open: {openHours}:00 - {closeHours}:00
@@ -96,29 +102,29 @@ function Header() {
 
 function Catalog() {
   return (
-    <main>
-      <ul>
-        <Product />
+    <main className="catalog">
+      <ul className="products">
+        {productData.map((item) => (
+          <Product productObj={item} />
+        ))}
       </ul>
     </main>
   );
 }
 
-function Product() {
-  const product = [...productData];
-
+function Product(props) {
   return (
-    <li>
-      <img src={product[0].photoName} alt={product[0].name} />
+    <li className="product">
+      <img src={props.productObj.photoName} alt={props.productObj.name} />
       <div>
-        <h3>{product[0].name}</h3>
-        <p>{product[0].description}</p>
-        <span>{product[0].price}</span>
+        <h3>{props.productObj.name}</h3>
+        <p>{props.productObj.description}</p>
+        <span>{props.productObj.price}</span>
       </div>
     </li>
   );
 }
 
 function Footer() {
-  return <footer>Footer</footer>;
+  return <footer className="footer">Footer</footer>;
 }
